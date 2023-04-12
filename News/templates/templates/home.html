@@ -1,0 +1,37 @@
+{% extends 'templates/base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block title %}Home - The Continental{% endblock %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/basenews.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            {% for article in articles %}
+            <div class="col-md-4 mb-3">
+                <div class="card w-100 w-md-50 rounded-0">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.preview|truncatewords:25 }}</p>
+                        <a href="{% url 'article_detail' pk=article.pk %}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+</body>
+
+{% endblock %}

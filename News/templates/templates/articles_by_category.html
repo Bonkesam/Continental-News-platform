@@ -1,0 +1,32 @@
+{% extends 'templates/base.html' %}
+
+{% block title %}
+    {{ category.name }} - The Continental
+{% endblock %}
+
+{% block content %}
+    <h1>{{ category.name }}</h1>
+
+    {% if articles %}
+        <ul>
+            {% for article in articles %}
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <p class="card-text">{{ article.preview|truncatewords:100 }}</p>
+                    <a href="{% url 'article_detail' pk=article.pk %}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+                <!--li>
+                    <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
+                    <p class="meta">
+                        By {{ article.author }} on {{ article.date_created|date:"F j, Y" }}
+                    </p>
+                    <p>{{ article.summary }}</p>
+                </li-->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No articles found for this category.</p>
+    {% endif %}
+{% endblock %}

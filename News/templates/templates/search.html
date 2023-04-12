@@ -1,0 +1,25 @@
+{% extends 'templates/base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>Search Articles</title>
+</head>
+<body>
+    <form method="get" action="{% url 'search_articles' %}">
+        <input type="text" name="q" placeholder="Search Articles" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <hr>
+
+    {% if articles %}
+        <h2>Search Results:</h2>
+        {% for article in articles %}
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.content }}</p>
+    <hr>
+        {% endfor %}
+    {% else %}
+        <p>No articles found.</p>
+    {% endif %}
+</body>
+</html>
